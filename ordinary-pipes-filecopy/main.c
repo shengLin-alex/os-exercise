@@ -2,7 +2,6 @@
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <errno.h> // error number
 #include <fcntl.h> // file descriptor
 
 #define READ_END 0
