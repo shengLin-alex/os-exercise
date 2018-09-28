@@ -18,9 +18,9 @@ int main(int argc, char** argv)
         return 1;
     }
 
-    int fileDescriptors[2];
-    char parentBuffer[BUFFER_SIZE];
-    char childBuffer[BUFFER_SIZE];
+    int* fileDescriptors = (int*)calloc(2, sizeof(int));
+    char* parentBuffer = (char*)calloc(BUFFER_SIZE, sizeof(char));
+    char* childBuffer = (char*)calloc(BUFFER_SIZE, sizeof(char));
 
     // take the program arguments.
     char* sourceFile = argv[1];
@@ -88,6 +88,10 @@ int main(int argc, char** argv)
         // write content to target file descriptor.
         write(destinationFileDescriptor, childBuffer, outputBytes);
     }
+
+    free(fileDescriptors);
+    free(parentBuffer);
+    free(childBuffer);
 
     return 0;
 }
