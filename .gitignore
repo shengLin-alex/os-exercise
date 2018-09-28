@@ -1,0 +1,4 @@
+.vscode/
+*.txt
+*.o
+filecopy
