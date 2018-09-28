@@ -77,7 +77,7 @@ int main(int argc, char** argv)
         close(fileDescriptors[READ_END]);
 
         // get output target file descriptor.
-        // check 0644 mean in hw1-2-15/main.c
+        // check 0644 mean in ../POSIX-file-api/main.c
         int destinationFileDescriptor = open(destinationFile, O_WRONLY | O_CREAT, 0644);
         if (destinationFileDescriptor == -1)
         {
