@@ -62,7 +62,15 @@ int main(int argc, char** argv)
         ssize_t inputBytes = read(sourceFileDescriptor, parentBuffer, BUFFER_SIZE);
 
         // write bytes to child process
-        write(fileDescriptors[WRITE_END], parentBuffer, inputBytes);
+        ssize_t outputBytes = write(fileDescriptors[WRITE_END], parentBuffer, inputBytes);
+
+        if (inputBytes != outputBytes)
+        {
+            fprintf(stderr, "I/O size not match.");
+
+            return 1;
+        }
+
         close(fileDescriptors[WRITE_END]);
     }
     else // child process
@@ -86,7 +94,14 @@ int main(int argc, char** argv)
         }
 
         // write content to target file descriptor.
-        write(destinationFileDescriptor, childBuffer, outputBytes);
+        ssize_t inputBytes = write(destinationFileDescriptor, childBuffer, outputBytes);
+
+        if (inputBytes != outputBytes)
+        {
+            fprintf(stderr, "I/O size not match.");
+
+            return 1;
+        }
     }
 
     free(fileDescriptors);

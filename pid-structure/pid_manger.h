@@ -10,7 +10,7 @@
 int* pidMap;
 
 // Creates and initializes a data structure for representing pids;
-// returns 1 if unsuccessful, 1 if successful
+// returns -1 if unsuccessful, 1 if successful
 int allocate_map()
 {
     pidMap = (int*)calloc(PID_RANGE, sizeof(int));
