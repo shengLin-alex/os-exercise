@@ -43,6 +43,11 @@ int allocate_pid()
 // release a pid.
 void release_pid(int pid)
 {
+    if(pid < 300)
+    {
+        return;
+    }
+
     pidMap[pid - MIN_PID] = 0;
 }
 
