@@ -8,12 +8,13 @@ int pointsPerThread = 0;
 int pointsInCircle = 0;
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 
-void* run(void* x) {
+void* run(void* randSeed) {
     int pointsInCirclePerThread = 0;
 
     for (int i = 0; i < pointsPerThread; i++) {
-        double x = (double)rand() / RAND_MAX;
-        double y = (double)rand() / RAND_MAX;
+        // use rand_r, cause rand_r is thread-safe.
+        double x = (double)rand_r(&((unsigned int*)randSeed)[0]) / RAND_MAX;
+        double y = (double)rand_r(&((unsigned int*)randSeed)[1]) / RAND_MAX;
 
         // x^2 + y^2 < 1 means points in circle
         if (((x * x) + (y * y)) < 1) {
@@ -44,12 +45,17 @@ int main(int argc, char** argv) {
 
     pointsPerThread = amountOfPoints / threadCount;
     
-    pthread_t* threads = malloc(threadCount * sizeof(pthread_t));
+    pthread_t* threads = (pthread_t*)malloc(threadCount * sizeof(pthread_t));
     pthread_attr_t attr;
     pthread_attr_init(&attr);
 
+    unsigned int* randSeed = (unsigned int*)malloc(2 * sizeof(unsigned int));
     for (int i = 0; i < threadCount; i++) {
-        pthread_create(&threads[i], &attr, run, NULL);
+        randSeed[0] = rand();
+        randSeed[1] = rand();
+
+        printf("%d %d\n", randSeed[0], randSeed[1]);
+        pthread_create(&threads[i], &attr, run, randSeed);
     }
 
     for (int i = 0; i < threadCount; i++) {
@@ -58,6 +64,7 @@ int main(int argc, char** argv) {
 
     pthread_mutex_destroy(&mutex);
     free(threads);
+    free(randSeed);
 
     double pi = 4.0 * pointsInCircle / amountOfPoints;
     printf("%d points; PI = %f", amountOfPoints, pi);
