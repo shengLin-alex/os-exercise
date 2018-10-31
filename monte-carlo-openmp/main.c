@@ -14,13 +14,15 @@ int main(int argc, char** argv) {
     }
 
 #pragma omp parallel for num_threads(8)
-    for (int i = 0; i < amountOfPoints; i++) {
-        double x = (double)rand() / RAND_MAX;
-        double y = (double)rand() / RAND_MAX;
+    {
+        for (int i = 0; i < amountOfPoints; i++) {
+            double x = (double)rand() / RAND_MAX;
+            double y = (double)rand() / RAND_MAX;
 
-        // x^2 + y^2 < 1 means points in circle
-        if (((x * x) + (y * y)) < 1) {
-            pointsInCircle++;
+            // x^2 + y^2 < 1 means points in circle
+            if (((x * x) + (y * y)) < 1) {
+                pointsInCircle++;
+            }
         }
     }
 
