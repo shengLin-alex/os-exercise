@@ -53,8 +53,6 @@ int main(int argc, char** argv) {
     for (int i = 0; i < threadCount; i++) {
         randSeed[0] = rand();
         randSeed[1] = rand();
-
-        printf("%d %d\n", randSeed[0], randSeed[1]);
         pthread_create(&threads[i], &attr, run, randSeed);
     }
 
