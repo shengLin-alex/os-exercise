@@ -10,7 +10,6 @@ pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 
 void* run(void* x) {
     int pointsInCirclePerThread = 0;
-    unsigned int randState = rand();
 
     for (int i = 0; i < pointsPerThread; i++) {
         double x = (double)rand() / RAND_MAX;
