@@ -1,8 +1,8 @@
-#include "stdlib.h"
-#include "omp.h"
-#include "string.h"
-#include "math.h"
-#include "stdio.h"
+#include <stdlib.h>
+#include <omp.h>
+#include <string.h>
+#include <math.h>
+#include <stdio.h>
 
 int main(int argc, char** argv) {
     int amountOfPoints = 0;

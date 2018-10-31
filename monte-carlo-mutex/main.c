@@ -1,8 +1,8 @@
-#include <stdlib.h>
 #include <pthread.h>
-#include <string.h>
-#include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <string.h>
 
 int amountOfPoints = 0;
 int pointsInCircle = 0;
