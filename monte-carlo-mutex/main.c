@@ -31,7 +31,7 @@ void* run(void* x) {
 }
 
 int main(int argc, char** argv) {
-    srand(time(NULL));
+    srand((unsigned)time(NULL));
 
     int threadCount = 0;
     int amountOfPoints = 0;

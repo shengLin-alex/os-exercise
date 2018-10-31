@@ -5,6 +5,7 @@
 #include <stdio.h>
 
 int main(int argc, char** argv) {
+    srand((unsigned)time(NULL));
     int amountOfPoints = 0;
     int pointsInCircle = 0;
 
